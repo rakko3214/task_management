@@ -12,6 +12,11 @@
 <h1>タスク一覧</h1>
 </div>
 
+<div class="my-4">
+  <p>未完了タスク合計数: <%= @tasks.where(done: false).count %></p>
+  <p>完了タスク合計数: <%= @tasks.where(done: true).count %></p>
+</div>
+
 <div class="mt-5">
   <% @tasks.each do |task| %>
     <%= render task %>
