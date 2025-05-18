@@ -20,7 +20,7 @@
 <div class="mt-5">
   <% @tasks.each do |task| %>
     <%= render task %>
-    <div class="relative h-12 overflow-hidden rounded-md border border-neutral-200 bg-transparent px-6 text-neutral-950 before:absolute before:left-0 before:top-0 before:block before:h-full before:w-full before:-translate-y-full before:bg-neutral-100 before:transition-transform hover:before:translate-y-0>
+    <div>
     <p>
       <%= link_to "Show this task", task %>
     </p>
