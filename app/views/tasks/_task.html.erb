@@ -2,6 +2,16 @@
   <p>
     <strong>Name:</strong>
     <%= task.title %>
+    <% if task.done %>
+      完了
+    <% else %>
+      未完了
+    <% end %>
   </p>
-
+  <%= button_to(
+          task.done ? "未完了に戻す" : "完了にする",
+          toggle_done_task_path(task),
+          method: :patch,
+          class: "ml-2 bg-green-500 text-white px-3 py-1 rounded"
+        ) %>
 </div>

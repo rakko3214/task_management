@@ -6,6 +6,11 @@ class TasksController < ApplicationController
     @tasks = Task.all
   end
 
+  def toggle_done
+    @task = Task.find(params[:id])
+    @task.update(done: !@task.done)
+    redirect_to tasks_path, notice: "タスクの状態を変更しました。"
+  end
   # GET /tasks/1 or /tasks/1.json
   def show
   end
