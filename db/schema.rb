@@ -15,6 +15,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_17_034310) do
     t.string "title", null: false
     t.text "description"
     t.boolean "done", default: false
+    t.date "due_date"
+    t.string "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
