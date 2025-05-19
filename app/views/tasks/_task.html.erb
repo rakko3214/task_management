@@ -1,13 +1,21 @@
-<div id="<%= dom_id task %>">
+<div id="<%= dom_id task %>", class="flex">
+  <div class="flex ">
   <p>
-    <strong>Name:</strong>
+    <strong>タイトル:</strong>
     <%= task.title %>
+    <div class="ml-2">
     <% if task.done %>
-      完了
+      <div class="text-blue-700">
+        完了
+      </div>
     <% else %>
-      未完了
+      <div class="text-pink-600">
+        未完了
+      </div>
     <% end %>
+    </div>
   </p>
+  </div>
   <%= button_to(
           task.done ? "未完了に戻す" : "完了にする",
           toggle_done_task_path(task),
