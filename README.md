@@ -1,6 +1,9 @@
 # README.md 記載内容（例）
 ## 使用技術・バージョン
 - 使用した言語・フレームワーク・ライブラリ
+ruby on rails 
+hotwire
+DaisyUI + Tailwind CSS
 ## 工夫した点
 - 自分なりに工夫したポイントや工夫した背景
 ## 難しかった点 / 改善したい点
