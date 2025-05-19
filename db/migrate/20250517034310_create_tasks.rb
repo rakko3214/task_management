@@ -4,6 +4,8 @@ class CreateTasks < ActiveRecord::Migration[7.2]
       t.string :title, null: false
       t.text :description
       t.boolean :done, default: false
+      t.date :due_date
+      t.string :category
 
       t.timestamps
     end
