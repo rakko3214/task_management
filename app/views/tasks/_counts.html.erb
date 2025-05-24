@@ -1,0 +1,4 @@
+<div id="task_counts" class="my-4">
+  <p>未完了タスク合計数: <%= tasks.where(done: false).count %></p>
+  <p>完了タスク合計数: <%= tasks.where(done: true).count %></p>
+</div>

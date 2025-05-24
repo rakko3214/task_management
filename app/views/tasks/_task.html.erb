@@ -1,8 +1,23 @@
 <div id="<%= dom_id task %>", class="flex">
   <div class="flex ">
-  <p>
-    <strong>タイトル:</strong>
+  <div class="mb-2 space-y-1">
+  <div>
+    <strong>タイトル：</strong>
     <%= task.title %>
+  </div>
+  <div>
+    <strong>説明：</strong>
+    <%= task.description %>
+  </div>
+  <div>
+    <strong>カテゴリー：</strong>
+    <%= task.category %>
+  </div>
+  <div>
+    <strong>期限：</strong>
+    <%= task.due_date %>
+  </div>
+</div>
     <div class="ml-2">
     <% if task.done %>
       <div class="text-blue-700">
@@ -14,12 +29,19 @@
       </div>
     <% end %>
     </div>
-  </p>
   </div>
   <%= button_to(
-          task.done ? "未完了に戻す" : "完了にする",
-          toggle_done_task_path(task),
-          method: :patch,
-          class: "ml-2 bg-green-500 text-white px-3 py-1 rounded"
-        ) %>
+      task.done ? "未完了に戻す" : "完了にする",
+      toggle_done_task_path(task),
+      method: :patch,
+      form: { data: { turbo_stream: true } },
+      class: "ml-2 bg-green-500 text-white px-3 py-1 rounded"
+    ) %>
+
+  <%= button_to "削除",
+          task_path(task),
+          method: :delete,
+          data: { turbo_confirm: "本当に削除しますか？" },
+          form: { data: { turbo_stream: true } },
+          class: "bg-red-500 text-white px-3 py-1 rounded" %>
 </div>

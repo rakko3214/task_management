@@ -1,24 +1,26 @@
 <div class="text-5xl">
-<h1>タスク管理アプリ</h1>
-
+  <h1>タスク管理アプリ</h1>
 </div>
-<%= link_to "タスク新規作成", new_task_path, class: "mt-5 inline-flex h-12 items-center justify-center rounded-md bg-neutral-950 px-6 font-medium text-neutral-50 transition active:scale-110" %>
+
+<div class="text-3xl mt-5 ">
+  <h1>新規登録</h1>
+</div>
+<div class="mt-5">
+  <div id="task_form">
+    <%= render "form", task: Task.new %>
+  </div>
+</div>
 
 <div class="mt-5 text-3xl">
-<h1>タスク一覧</h1>
+  <h1>タスク一覧</h1>
 </div>
 
-<div class="my-4">
-  <p>未完了タスク合計数: <%= @tasks.where(done: false).count %></p>
-  <p>完了タスク合計数: <%= @tasks.where(done: true).count %></p>
-</div>
+<%= render partial: "counts", locals: { tasks: @tasks } %>
 
 <h1><検索></h1>
-<div class="mt-5">
+
+<div id="tasks">
   <% @tasks.each do |task| %>
     <%= render task %>
-    <p>
-      <%= link_to "詳細", task, class: "cursor-pointer rounded-[8px] bg-neutral-200 px-3 py-1 text-sm text-neutral-950 transition-colors hover:bg-neutral-100 active:bg-neutral-50" %>
-    </p>
   <% end %>
 </div>
