@@ -9,7 +9,7 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     @task.update(done: !@task.done)
     @tasks = Task.all
-  
+
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_to tasks_path, notice: "タスクの状態を変更しました。" }
@@ -31,7 +31,7 @@ class TasksController < ApplicationController
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
-  end  
+  end
 
   def update
     respond_to do |format|
