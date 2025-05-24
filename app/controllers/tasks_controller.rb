@@ -1,7 +1,6 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: %i[ show edit update destroy ]
+  before_action :set_task, only: %i[ destroy ]
 
-  # GET /tasks or /tasks.json
   def index
     @tasks = Task.all
   end
@@ -9,31 +8,17 @@ class TasksController < ApplicationController
   def toggle_done
     @task = Task.find(params[:id])
     @task.update(done: !@task.done)
-    @tasks = Task.all # ← カウントや一覧更新に使う
+    @tasks = Task.all
   
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_to tasks_path, notice: "タスクの状態を変更しました。" }
     end
   end
-  
-  # GET /tasks/1 or /tasks/1.json
-  def show
-  end
 
-  # GET /tasks/new
-  def new
-    @task = Task.new
-  end
-
-  # GET /tasks/1/edit
-  def edit
-  end
-
-  # POST /tasks or /tasks.json
   def create
     @task = Task.new(task_params)
-  
+
     respond_to do |format|
       if @task.save
         @tasks = Task.all
@@ -46,10 +31,8 @@ class TasksController < ApplicationController
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
-  end
-  
+  end  
 
-  # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
     respond_to do |format|
       if @task.update(task_params)
@@ -62,7 +45,6 @@ class TasksController < ApplicationController
     end
   end
 
-  # DELETE /tasks/1 or /tasks/1.json
   def destroy
     @task.destroy!
 
@@ -73,12 +55,10 @@ class TasksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_task
       @task = Task.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def task_params
       params.require(:task).permit(:title, :description, :due_date, :category)
     end
