@@ -9,8 +9,14 @@ class TasksController < ApplicationController
   def toggle_done
     @task = Task.find(params[:id])
     @task.update(done: !@task.done)
-    redirect_to tasks_path, notice: "タスクの状態を変更しました。"
+    @tasks = Task.all # ← カウントや一覧更新に使う
+  
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to tasks_path, notice: "タスクの状態を変更しました。" }
+    end
   end
+  
   # GET /tasks/1 or /tasks/1.json
   def show
   end
@@ -27,17 +33,21 @@ class TasksController < ApplicationController
   # POST /tasks or /tasks.json
   def create
     @task = Task.new(task_params)
-
+  
     respond_to do |format|
       if @task.save
+        @tasks = Task.all
+        format.turbo_stream
         format.html { redirect_to @task, notice: "Task was successfully created." }
         format.json { render :show, status: :created, location: @task }
       else
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("task_form", partial: "tasks/form", locals: { task: @task }) }
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
   end
+  
 
   # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
